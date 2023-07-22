@@ -24,6 +24,12 @@ function MovieDetails() {
             <section className="movies">
                 <div key={clickedMovie.id}>
                     <h3>{clickedMovie.title}</h3>
+                    <ul>
+                        {/* Use the genres property directly */}
+                        {clickedMovie.genres.map((genre) => (
+                            <li key={genre}>{genre}</li>
+                        ))}
+                    </ul>
                     <img src={clickedMovie.poster} alt={clickedMovie.title} />
                     <p>{clickedMovie.description}</p>
                 </div>

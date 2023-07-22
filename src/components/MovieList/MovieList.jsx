@@ -21,9 +21,10 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             {/* clickable link for each movie */}
-                            <Link to={`/details/${movie.id}`}></Link>
+                            <Link to={`/details/${movie.id}`}>
                             <h3>{movie.title}</h3>
                             <img src={movie.poster} alt={movie.title} />
+                            </Link>
                         </div>
                     );
                 })}
