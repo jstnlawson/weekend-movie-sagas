@@ -23,25 +23,15 @@ function* rootSaga() {
 function* movieDetails(action) {
     try {
       const movieId = action.payload;
-      console.log('Received movie ID:', movieId)
-  
-      const detailsResponse = yield callaxios.get(`/api/details/${action.payload}`);
+      console.log('Received movie ID:', movieId);
+      const detailsResponse = yield axios.get(`/api/details/${action.payload}`);
       const clickedMovie = detailsResponse.data;
-      yield put({ type: 'SET_CLICKED_MOVIE', payload: clickedMovie });
-      console.log('SET_CLICKED_MOVIE payload:', payload)
+      yield put({ type: 'SET_DETAILS', payload: clickedMovie });
+      console.log('SET_DETAILS payload:', clickedMovie); 
     } catch (error) {
       console.log('get movie details error', error);
     }
   }
-  
-
-// function* genreDetails() {
-//     try {
-
-//     } catch {
-//         console.log('get genre details error');
-//     }
-// }
 
 
 function* fetchAllMovies() {
@@ -81,7 +71,7 @@ const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
-            // case 'SET_CLICKED_MOVIE':
+            // case 'SET_DETAILS':
             // return action.payload;
         default:
             return state;
@@ -90,7 +80,7 @@ const movies = (state = [], action) => {
 
 const movieDetailsReducer = (state ={}, action) => {
     switch (action.type) {
-        case 'SET_CLICKED_MOVIE':
+        case 'SET_DETAILS':
             return action.payload;
         default:
             return state;
