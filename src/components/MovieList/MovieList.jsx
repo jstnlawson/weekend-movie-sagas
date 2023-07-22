@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import './MovieList.css'
 
 function MovieList() {
@@ -18,8 +20,10 @@ function MovieList() {
                 {movies.map(movie => {
                     return (
                         <div key={movie.id} >
+                            {/* clickable link for each movie */}
+                            <Link to={`/details/${movie.id}`}></Link>
                             <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title}/>
+                            <img src={movie.poster} alt={movie.title} />
                         </div>
                     );
                 })}
