@@ -17,58 +17,31 @@ function* rootSaga() {
     yield takeEvery('FETCH_GENRES', fetchAllGenres)
 
     yield takeEvery('MOVIE_DETAILS', movieDetails)
-    yield takeEvery('GENRE_DETAILS', genreDetails)
+    // yield takeEvery('GENRE_DETAILS', genreDetails)
 }
 
 function* movieDetails(action) {
     try {
-        const movieId = action.payload;
-
-        // Fetch movie details
-        const movieQuery = `
-        SELECT
-          movies.id,
-          movies.title,
-          movies.poster,
-          movies.description
-        FROM
-          movies
-        WHERE
-          movies.id = $1;
-      `;
-        const movieResponse = yield call(axios.get, `/api/movie/query`, { params: [movieId] });
-
-        // Fetch genres associated with the movie
-        const genreQuery = `
-        SELECT
-          genres.name
-        FROM
-          genres
-        JOIN
-          movies_genres ON genres.id = movies_genres.genre_id
-        WHERE
-          movies_genres.movie_id = $1;
-      `;
-        const genreResponse = yield call(axios.get, `/api/genre/query`, { params: [movieId] });
-
-        // Combine movie and genre data and dispatch to the store
-        const clickedMovie = {
-            ...movieResponse.data[0],
-            genres: genreResponse.data.map((genre) => genre.name),
-        };
-        yield put({ type: 'SET_CLICKED_MOVIE', payload: clickedMovie });
+      const movieId = action.payload;
+      console.log('Received movie ID:', movieId)
+  
+      const detailsResponse = yield callaxios.get(`/api/details/${action.payload}`);
+      const clickedMovie = detailsResponse.data;
+      yield put({ type: 'SET_CLICKED_MOVIE', payload: clickedMovie });
+      console.log('SET_CLICKED_MOVIE payload:', payload)
     } catch (error) {
-        console.log('get movie details error', error);
+      console.log('get movie details error', error);
     }
-}
+  }
+  
 
-function* genreDetails() {
-    try {
+// function* genreDetails() {
+//     try {
 
-    } catch {
-        console.log('get genre details error');
-    }
-}
+//     } catch {
+//         console.log('get genre details error');
+//     }
+// }
 
 
 function* fetchAllMovies() {
@@ -87,8 +60,9 @@ function* fetchAllMovies() {
 function* fetchAllGenres() {
     // get all genres from the DB
     try {
+        console.log('Fetching all genres...')
         const genres = yield axios.get('/api/genre');
-        console.log('get all:', genres.data);
+        console.log('get all genres:', genres.data);
         yield put({ type: 'SET_GENRES', payload: genres.data });
 
     } catch {
@@ -114,7 +88,7 @@ const movies = (state = [], action) => {
     }
 }
 
-const movieDetailsReducer = (state = null, action) => {
+const movieDetailsReducer = (state ={}, action) => {
     switch (action.type) {
         case 'SET_CLICKED_MOVIE':
             return action.payload;
