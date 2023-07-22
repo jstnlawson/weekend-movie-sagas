@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-//I somehow had no memory of useParams so this held me up awhile
-import { useParams } from 'react-router-dom';
+
 
 
 function MovieDetails() {
 
     const dispatch = useDispatch();
-    const movies = useSelector(store => store.movies);
-    const { id } = useParams();
+    const clickedMovie = useSelector((store) => store.movieDetailsReducer); 
+    
 
-    // Find movie by ID
-    const clickedMovie = movies.find((movie) => movie.id === Number(id));
+    // if (!clickedMovie) {
+    //     return <h2>Loading...</h2>; // Or display a loading spinner
+    //   }
 
     useEffect(() => {
         dispatch({ type: 'MOVIE_DETAILS', payload: id });
-    }, []);
+    }, [id]);
+
+    const genres = clickedMovie.genres || [];
 
     return (
         <main>
@@ -25,9 +27,9 @@ function MovieDetails() {
                 <div key={clickedMovie.id}>
                     <h3>{clickedMovie.title}</h3>
                     <ul>
-                        {/* Use the genres property directly */}
+                        {/* map related genres */}
                         {clickedMovie.genres.map((genre) => (
-                            <li key={genre}>{genre}</li>
+                            <li key={id}>{genre}</li>
                         ))}
                     </ul>
                     <img src={clickedMovie.poster} alt={clickedMovie.title} />
