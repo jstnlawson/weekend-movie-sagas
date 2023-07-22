@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-//
+
+//I somehow had no memory of useParams so this held me up awhile
 import { useParams } from 'react-router-dom';
-// import './MovieDetails.css'
+
 
 function MovieDetails() {
 
