@@ -16,15 +16,21 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES', fetchAllGenres)
     yield takeEvery('MOVIE_DETAILS', movieDetails)
-    yield takeEvery('ADD_PLANT', )
+    yield takeEvery('ADD_MOVIE', addMovie)
 }
 
-function* addPlant(action) {
+function* addMovie(action) {
     try{
-      yield axios.post('/api/plant', action.payload)
-      yield put({type: 'FETCH_LIST'})
-    }catch (error){
-        console.log('error on addPlant:', error)
+        const { title, poster, description, genres } = action.payload;
+        yield axios.post('/api/form', {
+          title,
+          poster,
+          description,
+          genre_id: genres, 
+        });
+        yield put({ type: 'FETCH_MOVIES' });
+      } catch (error) {
+        console.log('error on addMovie:', error);
       }
   }
 

@@ -20,14 +20,12 @@ const MovieForm = () => {
     const theme = useTheme()
     let [newMovie, setMovie] = useState({genres: []});
 
-    const addNewMovie = event => {
+    const addNewMovie = (event) => {
         event.preventDefault();
-        dispatch({ type: 'ADD_MOVIE', payload: newMovie });
-        //updates the next movie to have a new id
-        //setMovie({});
+        dispatch({ type: 'ADD_MOVIE', payload: { ...newMovie, genres: genreName } });
         // Reset the form after submission
-        setMovie({ title: '', poster: '', description: '', genres: [] }); // Reset the form after submission
-        history.goBack();
+        setMovie({ title: '', poster: '', description: '', genres: newMovie.genres }); // Reset the form after submission
+        history.push('/');
     }
 
     const ITEM_HEIGHT = 48;
