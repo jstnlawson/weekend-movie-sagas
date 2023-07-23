@@ -22,13 +22,13 @@ function* rootSaga() {
 function* addMovie(action) {
     try{
         const { title, poster, description, genres } = action.payload;
-        yield axios.post('/api/form', {
+        yield axios.post('/api/movie', {
           title,
           poster,
           description,
           genre_id: genres, 
         });
-        yield put({ type: 'FETCH_MOVIES' });
+        yield put({ type: 'SET_MOVIES' });
       } catch (error) {
         console.log('error on addMovie:', error);
       }

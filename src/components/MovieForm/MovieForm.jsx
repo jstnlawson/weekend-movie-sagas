@@ -18,7 +18,7 @@ const MovieForm = () => {
     const history = useHistory()
     const [genreName, setGenreName] = useState([]);
     const theme = useTheme()
-    let [newMovie, setMovie] = useState({genres: []});
+    let [newMovie, setMovie] = useState({title: '', poster: '', description: '', genres: []});
 
     const addNewMovie = (event) => {
         event.preventDefault();
@@ -112,9 +112,9 @@ const MovieForm = () => {
                                 )}
                                 MenuProps={MenuProps}
                             >
-                                {genres.map((name) => (
+                                {genres.map((name, index) => (
                                     <MenuItem
-                                        key={name}
+                                        key={index}
                                         value={name}
                                         style={getStyles(name, newMovie.genres, theme)}
                                     >
