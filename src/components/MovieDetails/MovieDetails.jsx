@@ -1,12 +1,13 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 function MovieDetails() {
   const dispatch = useDispatch();
   const clickedMovie = useSelector((store) => store.movieDetailsReducer);
   const { id } = useParams();
+  const history = useHistory()
 
   useEffect(() => {
     dispatch({ type: 'MOVIE_DETAILS', payload: id });
@@ -45,6 +46,7 @@ return (
           </ul>
           <img src={clickedMovie?.poster} alt={clickedMovie?.title} />
           <p>{clickedMovie?.description}</p>
+          <button onClick={() => history.goBack()}>Back to List</button>
         </div>
       </section>
     </main>

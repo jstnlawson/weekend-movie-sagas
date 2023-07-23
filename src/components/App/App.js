@@ -8,12 +8,12 @@ function App() {
     <div className="App">
       <h1>The Movies Saga!</h1>
       <Router>        
-        <Route path="/" exact>
+        <Route exact path="/" component={MovieList}>
           <MovieList />
         </Route>
         
         {/* Details page id as parameter*/}
-        <Route path="/details/:id" exact>
+        <Route exact path="/details/:id" component={MovieDetails}>
           <MovieDetails />
         </Route>
         {/* Add Movie page*/}
