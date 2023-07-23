@@ -13,18 +13,18 @@ function App() {
     <div className="App">
       <h1>The Movies Saga!</h1>
       <Router>        
-        <Route exact path="/" component={MovieList}>
-          <MovieList />
-        </Route>
+        <Route exact path="/" component={MovieList}/>
+          {/* <MovieList />
+        </Route> */}
         
         {/* Details page id as parameter*/}
-        <Route exact path="/details/:id" component={MovieDetails}>
-          <MovieDetails />
-        </Route>
+        <Route exact path="/details/:id" component={MovieDetails}/>
+          {/* <MovieDetails />
+        </Route> */}
         {/* Add Movie page*/}
-        <Route exact path="/form" >
-          <MovieForm />
-        </Route>
+        <Route exact path="/form" component={MovieForm}/>
+          {/* <MovieForm />
+        </Route> */}
       </Router>
     </div>
   );

@@ -17,7 +17,17 @@ function* rootSaga() {
     yield takeEvery('FETCH_GENRES', fetchAllGenres)
     yield takeEvery('MOVIE_DETAILS', movieDetails)
     yield takeEvery('ADD_MOVIE', addMovie)
+    yield takeEvery('DELETE_MOVIE', deleteMovie)
 }
+
+function* deleteMovie(action) {
+    try {
+      yield axios.delete(`/api/movie/${action.payload}` )
+          yield put ({type: 'FETCH_LIST'})
+    } catch (error) {
+      console.log('error in delete:', error)
+  }
+  }
 
 function* addMovie(action) {
     try{

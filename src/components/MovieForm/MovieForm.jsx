@@ -26,7 +26,7 @@ const MovieForm = () => {
         // Reset the form after submission
         setMovie({ title: '', poster: '', description: '', genres: newMovie.genres }); // Reset the form after submission
         history.push('/');
-    }
+    } 
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -62,15 +62,15 @@ const MovieForm = () => {
       };
 
 
-        const handleChange = (event) => {
-            const {
-              target: { value },
-            } = event;
-            setgenreName(
-              // On autofill we get a stringified value.
-              typeof value === 'string' ? value.split(',') : value,
-            );
-          };
+        // const handleChange = (event) => {
+        //     const {
+        //       target: { value },
+        //     } = event;
+        //     setgenreName(
+        //       // On autofill we get a stringified value.
+        //       typeof value === 'string' ? value.split(',') : value,
+        //     );
+        //   };
 
 
         return (
@@ -124,7 +124,8 @@ const MovieForm = () => {
                             </Select>
                         </FormControl>
                     </div>
-                    <input type='submit' value='Save' onClick={() => history.goBack()} />
+                    <button type='submit' value='Save'>Save</button>
+                    {/* <input type='submit' value='Save' onClick={() => history.push('/')} /> */}
                     <button onClick={() => history.goBack()}>Cancel</button>
                 </form>
             </div>
