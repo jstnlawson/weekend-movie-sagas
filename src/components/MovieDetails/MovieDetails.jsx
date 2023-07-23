@@ -13,25 +13,6 @@ function MovieDetails() {
     dispatch({ type: 'MOVIE_DETAILS', payload: id });
   }, [dispatch, id]);
 
-//   return (
-//     <main>
-//       <h1>MovieDetails</h1>
-//       <section className="movies">
-//         {clickedMovie && (
-//           <div key={clickedMovie.id}>
-//             <h3>{clickedMovie.title}</h3>
-//             <ul>
-//               {clickedMovie.genres.map((genre, index) => (
-//                 <li key={index}>{genre}</li>
-//               ))}
-//             </ul>
-//             <img src={clickedMovie.poster} alt={clickedMovie.title} />
-//             <p>{clickedMovie.description}</p>
-//           </div>
-//         )}
-//       </section>
-//     </main>
-//   );
 return (
     <main>
       <h1>MovieDetails</h1>
