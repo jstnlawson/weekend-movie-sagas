@@ -15,23 +15,31 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES', fetchAllGenres)
-
     yield takeEvery('MOVIE_DETAILS', movieDetails)
-    // yield takeEvery('GENRE_DETAILS', genreDetails)
+    yield takeEvery('ADD_PLANT', )
 }
+
+function* addPlant(action) {
+    try{
+      yield axios.post('/api/plant', action.payload)
+      yield put({type: 'FETCH_LIST'})
+    }catch (error){
+        console.log('error on addPlant:', error)
+      }
+  }
 
 function* movieDetails(action) {
     try {
-      const movieId = action.payload;
-      console.log('Received movie ID:', movieId);
-      const detailsResponse = yield axios.get(`/api/details/${action.payload}`);
-      const clickedMovie = detailsResponse.data;
-      yield put({ type: 'SET_DETAILS', payload: clickedMovie });
-      console.log('SET_DETAILS payload:', clickedMovie); 
+        const movieId = action.payload;
+        console.log('Received movie ID:', movieId);
+        const detailsResponse = yield axios.get(`/api/details/${action.payload}`);
+        const clickedMovie = detailsResponse.data;
+        yield put({ type: 'SET_DETAILS', payload: clickedMovie });
+        console.log('SET_DETAILS payload:', clickedMovie);
     } catch (error) {
-      console.log('get movie details error', error);
+        console.log('get movie details error', error);
     }
-  }
+}
 
 
 function* fetchAllMovies() {
@@ -71,14 +79,14 @@ const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
-            // case 'SET_DETAILS':
-            // return action.payload;
+        case 'ADD_MOVIE':
+            return [...state, action.payload]
         default:
             return state;
     }
 }
 
-const movieDetailsReducer = (state ={}, action) => {
+const movieDetailsReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_DETAILS':
             return action.payload;
@@ -92,7 +100,7 @@ const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
             return action.payload;
-        
+
         default:
             return state;
     }

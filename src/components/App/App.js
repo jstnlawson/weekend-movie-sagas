@@ -3,6 +3,10 @@ import './App.css';
 import MovieList from '../MovieList/MovieList'
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieForm from '../MovieForm/MovieForm';
+import { ThemeProvider } from '@mui/material/styles';
+
+
+
 
 function App() {
   return (
