@@ -9,10 +9,12 @@ function MovieDetails() {
   const { id } = useParams();
   const history = useHistory()
 
+  //use the id of the clicked poster to GET details
   useEffect(() => {
     dispatch({ type: 'MOVIE_DETAILS', payload: id });
   }, [dispatch, id]);
 
+//display those deets
 return (
     <main>
       <h1>MovieDetails</h1>
@@ -20,7 +22,7 @@ return (
         <div key={clickedMovie?.id}>
           <h3>{clickedMovie?.title}</h3>
           <ul>
-            {/* Use optional chaining to safely access genres */}
+            {/* Not sure I needed optional chaining here */}
             {clickedMovie?.genres?.map((genre) => (
               <li key={genre}>{genre}</li>
             ))}

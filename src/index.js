@@ -17,34 +17,37 @@ function* rootSaga() {
     yield takeEvery('FETCH_GENRES', fetchAllGenres)
     yield takeEvery('MOVIE_DETAILS', movieDetails)
     yield takeEvery('ADD_MOVIE', addMovie)
-    yield takeEvery('DELETE_MOVIE', deleteMovie)
+    // yield takeEvery('DELETE_MOVIE', deleteMovie)
 }
 
-function* deleteMovie(action) {
-    try {
-      yield axios.delete(`/api/movie/${action.payload}` )
-          yield put ({type: 'FETCH_LIST'})
-    } catch (error) {
-      console.log('error in delete:', error)
-  }
-  }
+// function* deleteMovie(action) {
+//     try {
+//       yield axios.delete(`/api/movie/${action.payload}` )
+//           yield put ({type: 'FETCH_LIST'})
+//     } catch (error) {
+//       console.log('error in delete:', error)
+//   }
+//   }
+
 
 function* addMovie(action) {
-    try{
+    //add movie to db
+    try {
         const { title, poster, description, genres } = action.payload;
         yield axios.post('/api/movie', {
-          title,
-          poster,
-          description,
-          genre_id: genres, 
+            title,
+            poster,
+            description,
+            genre_id: genres,
         });
         yield put({ type: 'SET_MOVIES' });
-      } catch (error) {
+    } catch (error) {
         console.log('error on addMovie:', error);
-      }
-  }
+    }
+}
 
 function* movieDetails(action) {
+    //get movie details
     try {
         const movieId = action.payload;
         console.log('Received movie ID:', movieId);
@@ -116,7 +119,6 @@ const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
             return action.payload;
-
         default:
             return state;
     }
